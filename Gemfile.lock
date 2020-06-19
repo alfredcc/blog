@@ -87,7 +87,7 @@ PLATFORMS
 
 DEPENDENCIES
   html-proofer
-  jekyll (>= 3.8.6)
+  jekyll (~> 4.1.0)
   jekyll-paginate
   jekyll-redirect-from
   jekyll-seo-tag (~> 2.6.1)
