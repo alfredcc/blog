@@ -1,6 +1,9 @@
 source "https://rubygems.org"
 
-gem "jekyll", ">=3.8.6"
+#
+#     bundle exec jekyll serve
+#
+gem "jekyll", "~> 4.1.0"
 
 # Official Plugins
 group :jekyll_plugins do

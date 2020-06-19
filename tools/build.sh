@@ -59,13 +59,13 @@ _build() {
   eval $CMD
   echo -e "\nBuild success, the site files have been placed in '${DEST}'."
 
-  if [[ -d ${DEST}/.git ]]; then
-    if [[ ! -z $(git -C $DEST status -s) ]]; then
-      git -C $DEST add .
-      git -C $DEST commit -m "[Automation] Update site files." -q
-      echo -e "\nPlease push the changes of $DEST to remote master branch.\n"
-    fi
-  fi
+  # if [[ -d ${DEST}/.git ]]; then
+  #   if [[ ! -z $(git -C $DEST status -s) ]]; then
+  #     git -C $DEST add .
+  #     git -C $DEST commit -m "[Automation] Update site files." -q
+  #     echo -e "\nPlease push the changes of $DEST to remote master branch.\n"
+  #   fi
+  # fi
 
   cd .. && rm -rf $CONTAINER
 }
