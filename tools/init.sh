@@ -14,21 +14,21 @@ LASTMOD=false
 
 WORK_DIR=$(dirname $(dirname $(realpath "$0")))
 
-# check_status() {
-#   local _watching_dirs=(
-#     "_post"
-#     "_data")
+check_status() {
+  local _watching_dirs=(
+    "_post"
+    "_data")
 
-#   for i in "${!_watching_dirs[@]}"
-#   do
-#     local _dir=${_watching_dirs[${i}]}
-#     if [[ ! -z $(git status $_dir -s) ]]; then
-#       echo "Warning: Commit the changes of the directory '$_dir' first."
-#       git status -s | grep $_dir
-#       exit 1
-#     fi
-#   done
-# }
+  for i in "${!_watching_dirs[@]}"
+  do
+    local _dir=${_watching_dirs[${i}]}
+    if [[ ! -z $(git status $_dir -s) ]]; then
+      echo "Warning: Commit the changes of the directory '$_dir' first."
+      git status -s | grep $_dir
+      exit 1
+    fi
+  done
+}
 
 
 update_files() {
@@ -89,7 +89,7 @@ main() {
 
   update_files
 
-  commit
+  # commit
 }
 
 main

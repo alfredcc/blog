@@ -33,14 +33,14 @@ Custom Keyboard 要实现起来也非常简单，我们只需要在项目里新�
 
 总结如下：
 
-1. App extension 无法和第三方 App 直接通信（简单理解它们就是两个不同的进程，extension 启动了并不代表主App也会启动）
-2. App extension 可以通过 open URL 和主 App通信，但这条链路只是单向的
-3. 主 App 和 App extension 可以通过读写共同的文件资源来通信（比如 UserDefault）
-4. 另外一个方式这里没提到：就是可以用更底层的 DarwinNotify 来建立 Extension 和 Containing app 之间的通讯，可以参考下面的👇开源库
+1. App extension 无法直接与主 App 通信（简单的理解它们就是两个不同的进程，extension 启动了并不代表主App也会启动）
+2. App extension 可以通过 open URL 和主 App通信，但这条链路只是单向的（因为App extension 没有 `openURL`  之类接受消息的入口）
+3. 主 App 和 App extension 可以通过读写共同的文件资源来通信（比如 UserDefault, 前提需要加到同一个 `AppGroups` ）
+4. 另外一个官方没提到的方法：可以用更底层的 DarwinNotify 来建立 Extension 和 Containing app 之间的通讯，可以参考下面的👇开源库
 
 [choefele/CCHDarwinNotificationCenter](https://github.com/choefele/CCHDarwinNotificationCenter)
 
-> 通过 App Group 共同维护 UserDefault 是一种比较简单的通讯方法。但是开发者也需要注意的是如果我们的键盘没有获取到没有完全访问权限，键盘是只能读取，没法修改 UserDefault 的值的（如果这个 UserDefault 是 Containing app 创建的）。另外一点是 DarwinNotify 现在也需要完全访问权限了。
+> 通过 App Groups 共同维护 UserDefault 是一种比较简单的通讯方法。但是开发者也需要注意的是如果我们的键盘没有获取到没有完全访问权限，键盘是只能读取，没法修改 UserDefault 的值的（如果这个 UserDefault 是 Containing app 创建的）。另外一点是 DarwinNotify 现在同样也需要完全访问权限了。
 
 最后给大家一个忠告： 千万一定要在真机上调试！
 
@@ -148,5 +148,3 @@ var needsSwitchKey: Bool {
 [Custom Keyboard](https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/CustomKeyboard.html#//apple_ref/doc/uid/TP40014214-CH16-SW4)
 
 [Custom Keyboards - Extensions - iOS - Human Interface Guidelines - Apple Developer](https://developer.apple.com/design/human-interface-guidelines/ios/extensions/custom-keyboards/)
-
-
