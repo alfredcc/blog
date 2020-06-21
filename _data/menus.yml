@@ -1,0 +1,24 @@
+- title: Blog
+  url: /
+  external: false
+
+- title: Notes
+  url: /notes/
+  external: false # set true if you using external link, see bellow
+
+- title: Github
+  url: https://github.com/alfredcc
+  external: true
+
+- title: Twitter
+  url: https://twitter.com/cyvvvv
+  external: true
+
+- title: About
+  url: /about/
+  external: false
+
+# Example:
+# - title: github
+#   url: https://github.com/piharpi/jekyll-klise
+#   external: true
