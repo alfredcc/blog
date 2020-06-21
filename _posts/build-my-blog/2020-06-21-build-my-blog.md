@@ -51,7 +51,7 @@ tag: [Jekyll, Netlify]
 ## 最后
 整个过程搭建完毕，然后我们只要打开熟悉的 VSCode 安装上 markdown 插件就可以愉快的写博客啦。
 
-当然如果你想更加深度定制你的 blog 网站，作为一个程序员👨‍💻‍肯定难不到你，我们可以基于一些开源的 Theme 上做适当的修改，比如加一个侧边栏，给头像增加一点动效等（笔者也在这个主题上定制了一些自己的需求并且提交了 PR）。另外我们也可以用一些 `Serverless` 的服务比如 [google cloud function](https://cloud.google.com/functions) 用来弥补我们没有后端的尴尬场面，具体需求就靠大家自由发挥才智了。
+当然如果你想更加深度定制你的 blog 网站，作为一个程序员👨‍💻‍肯定难不倒你，我们可以基于一些开源的 Theme 上做适当的修改，比如加一个侧边栏，给头像增加一点动效等（笔者也在这个主题上定制了一些自己的需求并且提交了 PR）。另外我们也可以用一些 `Serverless` 的服务比如 [google cloud function](https://cloud.google.com/functions) 用来弥补我们没有后端的尴尬场面，具体需求就靠大家自由发挥才智了。
 
 推荐一些相关资源：
 [Jekyll Themes](https://jamstackthemes.dev/ssg/jekyll/)
