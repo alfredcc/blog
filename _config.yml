@@ -23,7 +23,7 @@ author:
 url: "https://racechao.netlify.app"
 baseurl:
 permalink: /:title/
-google_analytics:
+google_analytics: "UA-154766060-1"
 fb_appid:
 
 # Collection setting

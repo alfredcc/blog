@@ -2,9 +2,9 @@
 title: iOS Keyboard Extension Tips
 author: racechao
 date: 2020-06-19 22:34:00 +0800
-categories: [iOS]
-tags: [ios, keyboard extension]
-comments: ture
+tag:
+  - ios
+  - keyboard extension
 ---
 
 ![keyboard_architecture_2x.png](https://user-gold-cdn.xitu.io/2020/6/18/172c78576a0f70ee?w=1240&h=942&f=png&s=43116)
