@@ -6,7 +6,7 @@ description: first blog on my site
 image: "/build-my-blog/andrew-neel-unsplash.jpg"
 tag: [Jekyll, Netlify]
 ---
-
+<img src="/build-my-blog/andrew-neel-unsplash.jpg">
 
 经历了两天的折腾终于把我的博客搭建成功了👏🧨。
 整个过程虽然踩了很多坑，但最终的结果很令我满意，而且这个过程也是一个非常值得分享的事情。先简单介绍下我的博客主要使用 Jekyll + Github + Netlify + VSCode（用来写 Markdown）的框架来搭建，然后就直接上正菜吧！
