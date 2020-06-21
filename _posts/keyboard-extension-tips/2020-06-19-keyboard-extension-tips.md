@@ -7,7 +7,7 @@ tag:
   - keyboard extension
 ---
 
-![keyboard_architecture_2x.png](https://user-gold-cdn.xitu.io/2020/6/18/172c78576a0f70ee?w=1240&h=942&f=png&s=43116)
+![keyboard_architecture_2x.png](keyboard.jpg)
 
 Apple 在 iOS 8 里就引入了 Keyboard Extension，但网上相关但开发但资料很少，我在开发中也遇到了不少坑，为了给大家分享下这方面但知识，所以才有了这篇文章。
 Custom Keyboard 要实现起来也非常简单，我们只需要在项目里新建一个 Custom Keyboard Extension 的 Target，Xcode 就自动会给我们创建一个 KeyboardViewController，开发者通过这个类就可以做简单的开发了。但是往往实际情况并没有那么简单。我们可能需要在键盘请求网络数据，或者和Containing App 通信等等，这时我们会遇到很多问题。这边文章我会讲述一下常见的问题和解法。
@@ -25,7 +25,7 @@ Custom Keyboard 要实现起来也非常简单，我们只需要在项目里新�
 
 ### Extension 如何通讯
 
-![detailed_communication_2x.png](https://user-gold-cdn.xitu.io/2020/6/18/172c7857750786ab?w=1240&h=437&f=png&s=20772)
+![detailed_communication_2x.png](open-url.jpg)
 
 
 这是苹果官方给出的一张图，Containing App 是我们的主 App, Host app 是 Extension 所运行的第三方 App（比如微信），为了方便理解下面我们会把 Containing App 称为“主 App”，Host App 称为“第三方 App”。
@@ -47,10 +47,10 @@ Custom Keyboard 要实现起来也非常简单，我们只需要在项目里新�
 
 ```swift
 var isKeyboardEnabled: Bool {
-    guard let keyboards = UserDefaults.standard.object(forKey: "AppleKeyboards") as? [String] else {
-        return false
-    }
-    return keyboards.contains("你的 extension bundle id")
+  guard let keyboards = UserDefaults.standard.object(forKey: "AppleKeyboards") as? [String] else {
+    return false
+  }
+  return keyboards.contains("你的 extension bundle id")
 }
 ```
 
@@ -64,27 +64,28 @@ var isKeyboardEnabled: Bool {
 // Step1: 在 keyboard 中调用
 // 打开主APP，比如 openURL(scheme:"yourAppScheme://actived")
 func openURL(scheme: String) {
-	let url = URL(string: scheme)!
-	let context = NSExtensionContext()
-	context.open(url, completionHandler: nil)
-	var responder = self as UIResponder?
-	let selectorOpenURL = sel_registerName("openURL:")
-	while (responder != nil) {
-		if responder!.responds(to: selectorOpenURL) {
-			responder!.perform(selectorOpenURL, with: url)
-			break
-		}
-		responder = responder?.next
-	}
+  let url = URL(string: scheme)!
+  let context = NSExtensionContext()
+  context.open(url, completionHandler: nil)
+  var responder = self as UIResponder?
+  let selectorOpenURL = sel_registerName("openURL:")
+  while (responder != nil) {
+    if responder!.responds(to: selectorOpenURL) {
+      responder!.perform(selectorOpenURL, with: url)
+      break
+    }
+    responder = responder?.next
+  }
 }
 
 // step2:
 // app 在前台的时候接收通知
-func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-	if url.scheme == "yourAppScheme" && url.host == "actived" {
-		// do something
-	}
-	return true
+func application(_ app: UIApplication, open url: URL, 
+               options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+  if url.scheme == "yourAppScheme" && url.host == "actived" {
+    // do something
+  }
+  return true
 }
 ```
 
@@ -107,19 +108,19 @@ AudioServicesPlaySystemSound(SystemSoundID)
 ```swift
 // Keyboard Extension
 override var hasFullAccess: Bool {
-	if #available(iOS 11.0, *) {
-		return super.hasFullAccess// super is UIInputViewController.
-	}
-	if #available(iOS 10.0, *) {
-		let original: String? = UIPasteboard.general.string
-		UIPasteboard.general.string = " "
-		let val: Bool = UIPasteboard.general.hasStrings
-		if let str = original {
-			UIPasteboard.general.string = str
-		}
-		return val
-	}
-	return UIPasteboard.general.isKind(of: UIPasteboard.self)
+  if #available(iOS 11.0, *) {
+    return super.hasFullAccess// super is UIInputViewController.
+  }
+  if #available(iOS 10.0, *) {
+    let original: String? = UIPasteboard.general.string
+    UIPasteboard.general.string = " "
+    let val: Bool = UIPasteboard.general.hasStrings
+    if let str = original {
+      UIPasteboard.general.string = str
+    }
+    return val
+  }
+  return UIPasteboard.general.isKind(of: UIPasteboard.self)
 }
 ```
 
@@ -132,15 +133,13 @@ override var hasFullAccess: Bool {
 ```swift
 // needsInputModeSwitchKey
 var needsSwitchKey: Bool {
-	if #available(iOSApplicationExtension 11.0, *) {
-		return needsInputModeSwitchKey
-	} else {
-		return true
-	}
+  if #available(iOSApplicationExtension 11.0, *) {
+    return needsInputModeSwitchKey
+  } else {
+    return true
+  }
 }
 ```
-
----
 
 ### 其他资料
 

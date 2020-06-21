@@ -1,5 +1,5 @@
 ---
-title: 如何搭建一个适合自己的 blog 站
+title: 2020年如何搭建一个适合自己的 blog
 author: racechao
 date: 2020-06-21 21:34:00 +0800
 description: first blog on my site
@@ -29,14 +29,14 @@ tag: [Jekyll, Netlify]
 
 ## 流程自动化
 
-由于我们使用了`静态网站生成器`每次写完文字都需要运行一遍 build 命令(比如`jekyll build`)重新生成一遍静态资源。所以就需要把这些重复的流程自动化，也就是 CI 自动部署。我用的是 Netlify 的免费版（300 次 build 的免费对于我这个可能月更的博客站点完全够用了），而且配置非常简单：直接向 Github 授权，然后选择你的 blog 项目就可以了，如果你项目使用了 Jekyll ，Netlify 会自动识别到，并且默认就帮你配置好了 Build 选项，简直黑科技！
+由于我们使用了`静态网站生成器`每次写完文字都需要运行一遍 build 命令(比如`jekyll build`)重新生成一遍静态资源。所以就需要把这些重复的流程自动化，也就是 CI 自动部署。我用的是 Netlify 的免费版（300 次 build 的免费额度对于我这个可能月更的博客站点完全够用了），而且配置非常简单：直接向 Github 授权，然后选择你的 blog 项目就可以了，如果你项目使用了 Jekyll ，Netlify 会自动识别到，并且默认就帮你配置好了 Build 选项，简直黑科技！
 
 ![netlify-build](netlify-build.png)
 
-当然我们也可以使用 [Github Action](https://jekyllrb.com/docs/continuous-integration/github-actions/) 来做 CI 也很香。这样我们写完博客直接往 github 已提交，系统就自动帮我们生成好静态资源并部署到 CDN 上了。
+当然我们也可以使用 [Github Action](https://jekyllrb.com/docs/continuous-integration/github-actions/) 来做 CI 也很香。这样我们写完博客直接往 Github 上一提交，系统就自动帮我们生成好静态资源并部署到 CDN 上了。
 
 ## 评论系统
-之前看到很多博客站使用 `disqus` 虽然集成也方便，但是广告多加载又慢，当我看到[utterances](https://utteranc.es/) 这个开源工具就爱上了，果断放弃 `disqus`，`utterances`是一款基于 GitHub issues 的评论工具，优点如下：
+之前看到很多博客站使用 `disqus` 虽然集成也方便，但是广告多加载又慢，当我看到 [utterances](https://utteranc.es/) 这个开源工具就爱上了，果断放弃 `disqus`，`utterances`是一款基于 GitHub issues 的评论工具，优点如下：
 1. 轻量
 2. 加载非常快
 3. 配置简单
@@ -44,6 +44,9 @@ tag: [Jekyll, Netlify]
 
 ## 静态资源托管
 因为我们的网站是托管在 CDN 上的，访问速度的快慢主要就依赖你所托管的 CDN 服务商的速度，所以如果我们想优化国内的访问速度就需要尽量选择国内的托管服务（可惜好像没有特别好的）。
+
+## Mobile Design First
+另外在提一下 `Mobile Design First` ，在找一些主题的过程中发现很多主题都使用 `Mobile Design First`;
 
 具体你可以参考这里:
 <a href="https://github.com/lmk123/blog/issues/55" target="_blank" rel="">介绍一些免费好用的静态网站托管服务</a>
