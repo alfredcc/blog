@@ -45,9 +45,6 @@ tag: [Jekyll, Netlify]
 ## 静态资源托管
 因为我们的网站是托管在 CDN 上的，访问速度的快慢主要就依赖你所托管的 CDN 服务商的速度，所以如果我们想优化国内的访问速度就需要尽量选择国内的托管服务（可惜好像没有特别好的）。
 
-## Mobile Design First
-另外在提一下 `Mobile Design First` ，在找一些主题的过程中发现很多主题都使用 `Mobile Design First`;
-
 具体你可以参考这里:
 <a href="https://github.com/lmk123/blog/issues/55" target="_blank" rel="">介绍一些免费好用的静态网站托管服务</a>
 
