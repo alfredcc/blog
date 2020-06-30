@@ -26,8 +26,8 @@ AF.request("https://httpbin.org/get").response { response in
 如何下手呢？解决一个问题的最常用的方法就是先看清楚问题，然后把大问题拆成小问题，再一个个解决。我们先来思考下🤔，一个完整请求要做的事情什么：
 1. 将 url，method，body 封装成一个 `HTTP Request` 对象，
 2. 设置请求的 `HTTP Header `
-3. 接受 `HTTP Request` 回来的 data 数据
-4. 处理 error 和 response code
+3. 接受 `HTTP Request` 回来的 `data` 数据
+4. 处理 `error` 和 `response code`
 5. 通过 `codable` 之类的框架将 raw data 转换 model 对象
 6. 请求重试
 
@@ -119,8 +119,9 @@ static func auth(from: String, token: String) -> AuthResult? {
     
 ```
 
-## 如何支持 RxSwift
-
+## RxSwift 真香系列😋
+不会 `RxSwift` 建议大家都去学一啦，响应式编程真的很棒棒
+#### 如何支持 RxSwift
 ```swift
 extension HTTPClient: ReactiveCompatible {}
 
@@ -150,7 +151,7 @@ extension Reactive where Base: HTTPClient {
 }
 ```
 
-## 重试和请求合并
+#### 重试和请求合并
 得益与 RxSwift 重试和请求合并非常简单。
 ```swift 
 // 请求合并
@@ -227,16 +228,12 @@ extension ObservableType {
 2. 当我们遇到服务端返回的不标准的数据结构怎么处理？
 3. 使用 `Codable` 区分返回的是 Array 还是 Object 是要不同处理的
 4. 当我们有多个 API 地址比如测试环境和正式环境，那么我们如何去管理？
-都是我们需要去解决的。我当初也踩了无数坑，太难了。
+
+这些都是我们需要去解决的。我当初也踩了无数坑，太难了。
 这些问题先留给大家思考吧😆
 
-
-   
 ## 参考
 
-最后还是大力推荐下喵神在台湾 iPlayground 的演讲
-https://speakerdeck.com/onevcat/wang-lu-zhi-nan-nan-yu-shang-qing-tian-iplayground-2019?slide=143
+[最后还是大力推荐下喵神在台湾 iPlayground 的演讲](https://speakerdeck.com/onevcat/wang-lu-zhi-nan-nan-yu-shang-qing-tian-iplayground-2019?slide=143)
 
 https://www.youtube.com/watch?v=Xk4HZfW6vK0
-
-
