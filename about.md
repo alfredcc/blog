@@ -14,3 +14,4 @@ iOS 开发者一枚，铲屎官🐈，数码控，科技爱好者，暂居杭州
 ##### 联系信息 ✨
 - {{ site.author.email }}
 - github.com/{{ site.author.username }}
+- https://twitter.com/cyvvvv
