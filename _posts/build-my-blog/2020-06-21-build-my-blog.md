@@ -3,10 +3,9 @@ title: 2020年如何搭建一个适合自己的 blog
 author: racechao
 date: 2020-06-21 21:34:00 +0800
 description: first blog on my site
-image: "/build-my-blog/andrew-neel-unsplash.jpg"
 tag: [Jekyll, Netlify]
 ---
-<img src="/build-my-blog/andrew-neel-unsplash.jpg">
+<img src="/assets/img/desktop.jpg">
 
 经历了两天的折腾终于把我的博客搭建成功了👏🧨。
 整个过程虽然踩了很多坑，但最终的结果很令我满意，而且这个过程也是一个非常值得分享的事情。先简单介绍下我的博客主要使用 Jekyll + Github + Netlify + VSCode（用来写 Markdown）的框架来搭建，然后就直接上正菜吧！
@@ -31,7 +30,7 @@ tag: [Jekyll, Netlify]
 
 由于我们使用了`静态网站生成器`每次写完文字都需要运行一遍 build 命令(比如`jekyll build`)重新生成一遍静态资源。所以就需要把这些重复的流程自动化，也就是 CI 自动部署。我用的是 Netlify 的免费版（300 次 build 的免费额度对于我这个可能月更的博客站点完全够用了），而且配置非常简单：直接向 Github 授权，然后选择你的 blog 项目就可以了，如果你项目使用了 Jekyll ，Netlify 会自动识别到，并且默认就帮你配置好了 Build 选项，简直黑科技！
 
-![netlify-build](netlify-build.png)
+![netlify-build](/assets/img/netlify-build.png)
 
 当然我们也可以使用 [Github Action](https://jekyllrb.com/docs/continuous-integration/github-actions/) 来做 CI 也很香。这样我们写完博客直接往 Github 上一提交，系统就自动帮我们生成好静态资源并部署到 CDN 上了。
 

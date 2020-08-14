@@ -7,7 +7,7 @@ tag:
   - keyboard extension
 ---
 
-![keyboard_architecture_2x.png](keyboard.jpg)
+![keyboard_architecture_2x.png](/assets/img/keyboard.jpg)
 
 Apple 在 iOS 8 里就引入了 Keyboard Extension，但网上相关但开发但资料很少，我在开发中也遇到了不少坑，为了给大家分享下这方面但知识，所以才有了这篇文章。
 Custom Keyboard 要实现起来也非常简单，我们只需要在项目里新建一个 Custom Keyboard Extension 的 Target，Xcode 就自动会给我们创建一个 KeyboardViewController，开发者通过这个类就可以做简单的开发了。但是往往实际情况并没有那么简单。我们可能需要在键盘请求网络数据，或者和Containing App 通信等等，这时我们会遇到很多问题。这边文章我会讲述一下常见的问题和解法。
@@ -25,7 +25,7 @@ Custom Keyboard 要实现起来也非常简单，我们只需要在项目里新�
 
 ### Extension 如何通讯
 
-![detailed_communication_2x.png](open-url.jpg)
+![detailed_communication_2x.png](/assets/img/open-url.jpg)
 
 
 这是苹果官方给出的一张图，Containing App 是我们的主 App, Host app 是 Extension 所运行的第三方 App（比如微信），为了方便理解下面我们会把 Containing App 称为“主 App”，Host App 称为“第三方 App”。
