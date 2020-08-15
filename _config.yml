@@ -13,7 +13,7 @@ mode: dark # default theme "dark" | "light"
 author:
   name: racechao # author name
   bio: >- # tell to the world
-    Everything is theoretically impossible, until it is done.
+    [weak self] try! code
 
   username: alfredcc # social media username eg. github, twitter 
   email: racechao@gmail.com # your contact adress
