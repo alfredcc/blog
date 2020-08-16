@@ -14,12 +14,3 @@ jobs:
       - uses: alfredcc/jekyll-action@master 
         env:
           JEKYLL_PAT: ${{ secrets.JEKYLL_PAT }}
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.JEKYLL_PAT }}
-          publish_dir: ./_site/
-          allow_empty_commit: true
-          enable_jekyll: true
-          cname: jiechaoz.com
