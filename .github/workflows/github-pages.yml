@@ -6,11 +6,20 @@ on:
       - master
 
 jobs:
-  github-pages:
+  jekyll:
     runs-on: ubuntu-16.04
     steps:
-      - uses: actions/checkout@v2
+    - uses: actions/checkout@v2
 
-      - uses: alfredcc/jekyll-action@master 
-        env:
-          JEKYLL_PAT: ${{ secrets.JEKYLL_PAT }}
+    # Use GitHub Actions' cache to shorten build times and decrease load on servers
+    - uses: actions/cache@v2
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-
+
+    # Build & Deploy
+    - uses:  helaili/jekyll-action@2.0.3
+      env:
+        JEKYLL_PAT: ${{ secrets.JEKYLL_PAT }}

@@ -65,7 +65,7 @@ include:
   - .htaccess
 
 exclude:
-  - CNAME
+  #- CNAME
   - Gemfile
   - Gemfile.lock
   - LICENSE
