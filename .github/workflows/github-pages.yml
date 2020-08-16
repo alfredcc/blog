@@ -10,19 +10,16 @@ jobs:
     runs-on: ubuntu-16.04
     steps:
       - uses: actions/checkout@v2
-      - uses: finnp/create-file-action@master
-        env:
-          FILE_NAME: "./_site/CNAME"
-          FILE_DATA: "jiechaoz.com"
 
-      # - uses: actions/cache@v2
-      # with:
-      #   path: vendor/bundle
-      #   key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-      #   restore-keys: |
-      #     ${{ runner.os }}-gems-
-
-      - uses: helaili/jekyll-action@2.0.3
+      - uses: alfredcc/jekyll-action@master 
         env:
           JEKYLL_PAT: ${{ secrets.JEKYLL_PAT }}
-      - uses: finnp/create-file-action@master
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.JEKYLL_PAT }}
+          publish_dir: ./_site/
+          allow_empty_commit: true
+          enable_jekyll: true
+          cname: jiechaoz.com
