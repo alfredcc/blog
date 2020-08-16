@@ -10,16 +10,16 @@ jobs:
     runs-on: ubuntu-16.04
     steps:
       - uses: actions/checkout@v2
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+
+      # Use GitHub Actions' cache to shorten build times and decrease load on servers
+      - uses: actions/cache@v1
         with:
-          github_token: ${{ secrets.JEKYLL_PAT }}
-          publish_dir: ./_site/
-          allow_empty_commit: true
-          enable_jekyll: true
-          cname: jiechaoz.com
-    # steps:
-    #   - uses: actions/checkout@v2
-    #   - uses: helaili/jekyll-action@2.0.3
-    #     env:
-    #       JEKYLL_PAT: ${{ secrets.JEKYLL_PAT }}
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+
+      - name: Build and deploy Jekyll
+        uses: helaili/jekyll-action@2.0.3
+         env:
+          JEKYLL_PAT: ${{ secrets.JEKYLL_PAT }}
