@@ -78,4 +78,4 @@ exclude:
 plugins:
   - jekyll-feed
   - jekyll-sitemap
-  #- jekyll-postfiles
+  # - jekyll-postfiles
