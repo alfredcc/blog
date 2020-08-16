@@ -3,8 +3,7 @@ title: 博客优化和迁移，我却采坑了个大坑
 author: racechao
 date: 2020-08-16
 tag:
-  - ios
-  - keyboard extension
+  - github actions
 ---
 ![Cloudflare architecture](/assets/img/github-actions.jpg)
 
