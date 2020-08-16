@@ -9,8 +9,8 @@ jobs:
   github-pages:
     runs-on: ubuntu-16.04
     steps:
-      - name: Deploy to GitHub Pages
       - uses: actions/checkout@v2
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.JEKYLL_PAT }}
