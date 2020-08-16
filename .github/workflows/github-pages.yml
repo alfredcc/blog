@@ -1,4 +1,4 @@
-name: GitHub Pages
+name: Build and deploy Jekyll site to GitHub Pages
 
 on:
   push:
@@ -13,13 +13,12 @@ jobs:
 
       # Use GitHub Actions' cache to shorten build times and decrease load on servers
       - uses: actions/cache@v1
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gems-\
 
-      - name: Build and deploy Jekyll
-        uses: helaili/jekyll-action@2.0.3
-         env:
+      - uses: helaili/jekyll-action@2.0.3
+        env:
           JEKYLL_PAT: ${{ secrets.JEKYLL_PAT }}
