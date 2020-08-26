@@ -1,5 +1,5 @@
 ---
-title: Static Keyworld in Swift
+title: 讲讲 static 关键字在 Swift 中的作用
 author: racechao
 date: 2020-08-26
 tag:
