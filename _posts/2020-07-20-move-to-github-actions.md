@@ -54,7 +54,7 @@ jobs:
 > 注意 CNAME 里面只有一条记录可以生效，换句话说你只能输入一个自定义域名地址
 
 #### 4. 强制开启 HTTPS
-因为安全策略，我开了 `Surge` 用 `Chrome` 在访问 HTTP 网页的时候会报错，所以需要强制将将 HTTP 跳转到 HTTPS。如果我们网站有 `Nginx` 的话，简单配个规则就行了，但是我的博客是托管在 `Github Pages` 上的，那就得试试其他办法。`Github Pages` 可以强制开启 HTTPS，但似乎得需要自己申请 `Let's Encrypt`（默认是不可选的），最后 Google 了一下，其实我们配个 meta 标签就行了。
+因为安全策略，用 `Chrome` 在访问 HTTP 网页的时候会报错，所以需要强制将 HTTP 跳转到 HTTPS。如果我们网站有 `Nginx` 的话，简单配个规则就行了，但是我的博客是托管在 `Github Pages` 上的，那就得试试其他办法。`Github Pages` 可以强制开启 HTTPS，但似乎得需要自己申请 `Let's Encrypt`（默认是不可选的），最后 Google 了一下，其实我们配个 meta 标签就行了。
 ```html
 <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 ```
