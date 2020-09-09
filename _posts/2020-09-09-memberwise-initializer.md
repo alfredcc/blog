@@ -3,7 +3,7 @@ title: Swift 中关于 Memberwise Initializer 的一个小技巧
 author: racechao
 date: 2020-09-09
 tag:
-  - github actions
+  - swift Initializer
 ---
 我们都知道在 Swift 的 Struct 中，如果我们不实现 init 方法，compile 会默认帮我们生成一个，官方文档把这叫作 `memberwise initializer`。当我的 model 中有很多 property 这就很方便了，不用写一个很长的 init() 函数。但是当我们自定义了一个初始化方法，这个“默认的”初始化方法就不能用了。
 
