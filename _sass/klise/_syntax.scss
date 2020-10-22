@@ -11,11 +11,11 @@ code {
   font-size: 14px;
 
   &.highlighter-rouge {
-    padding: 1px 3px;
+    padding: 0.25rem 0.5rem;
     position: relative;
     top: -1px;
-    background-color: #f6f6f6;
-    border-radius: 2px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 0.4em;
   }
 }
 

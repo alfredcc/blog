@@ -20,7 +20,7 @@ Xcode11 出来之前一直没留意这里的配置是什么意思，所以刚好
 而这些签名后的 Framwork 就可以使用 Embed without sign 了。
 
 另外群里小伙伴提到 “这个 input 和 output 貌似可以优化 build 时间，里面有个 copy resource 的过程，会从这个 files 里面搜有没有命中的 path”
-关与 Carthage 为什么要使用`copy framworks` 而不止直接使用 Xcode 自带的功能比如`xcfilelist`，可以看看这些 [issue1](https://github.com/Carthage/Carthage/issues/2605#issuecomment-427403929),[issue2](https://github.com/Carthage/Carthage/issues/2477)
+关与 Carthage 为什么要使用`copy framworks` 而不止直接使用 Xcode 自带的功能比如 `xcfilelist` ，可以看看这些 [issue1](https://github.com/Carthage/Carthage/issues/2605#issuecomment-427403929),[issue2](https://github.com/Carthage/Carthage/issues/2477)
 我的理解这么做相当于加了一个中间层，Carthage 可以在过程中做很多优化比如下面提到的：
 ```
 One advantage of the "Input Files"/"Output Files" mechanism built in to Xcode is that it will check timestamps of the input and output files and do nothing if the output file is already up-to-date. Ideally a tool that automatically sets the SCRIPT_INPUT_FILE_... and SCRIPT_OUTPUT_FILE_... environment variables could similarly check the timestamps and omit frameworks that are already up-to-date.
