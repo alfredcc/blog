@@ -69,7 +69,12 @@ struct 相比 class 更加轻量，没有继承，不能共享内存，也没有
 copy on write 内部实现是用了一个 private 的 class 来存储这个值类型的变量，然后通过变量 get set 的方式将内部class 的属性暴露出去。在 set 方法中调用 `copy()` 来实现 copy on write。要注意的时候我们需要检查内部这个 class 的 storage 的引用是不是唯一的，因为如果是同一个引用，我们没必要在每次修改的时候都进行复制操作，那是一种资源的浪费。
 
 ## indirect
-`indirect` 语法仅适用于枚举。因为枚举是值类型，值类型是不能包含自身的，因为编译器需要能够计算每种类型的大小，这个大小是一个固定的有限的尺寸。假设我们可以包含自身，那就可能出现无限递归，编译器就不能确定大小了，所以 `indirect` 可以用来告诉编译器将我们递归的成员作为一个引用（因为引用的大小是确定的，在64位的系统上是 8 个字节）。
+
+[img1](/assets/img/struct-recursively.png)
+我们在用 `struct` 的时候如果属性包含了自己，会遇到 `Value type 'A' cannot have a stored property that recursively contains it` 的错误。那是因为编译器对于值类型需要能够计算他内存布局的大小，这个大小是一个固定的有限的尺寸。假设我们可以包含自身，那就可能出现无限递归，编译器就不能确定大小了。
+
+在枚举中我们可以用 `indirect` 修饰，但仅适用于枚举。`indirect` 可以用来告诉编译器将我们递归的成员作为一个引用（因为引用的大小是确定的，在64位的系统上是 8 个字节）。
+
 ```swift
 // 类似实现
 final class Box<A> {
