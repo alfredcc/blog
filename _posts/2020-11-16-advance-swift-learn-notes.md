@@ -70,7 +70,7 @@ copy on write 内部实现是用了一个 private 的 class 来存储这个值�
 
 ## indirect
 
-[img1](/assets/img/struct-recursively.png)
+![img](/assets/img/struct-recursively.png)
 我们在用 `struct` 的时候如果属性包含了自己，会遇到 `Value type 'A' cannot have a stored property that recursively contains it` 的错误。那是因为编译器对于值类型需要能够计算他内存布局的大小，这个大小是一个固定的有限的尺寸。假设我们可以包含自身，那就可能出现无限递归，编译器就不能确定大小了。
 
 在枚举中我们可以用 `indirect` 修饰，但仅适用于枚举。`indirect` 可以用来告诉编译器将我们递归的成员作为一个引用（因为引用的大小是确定的，在64位的系统上是 8 个字节）。
