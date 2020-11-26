@@ -79,6 +79,45 @@ copy on write 内部实现是用了一个 private 的 class 来存储这个值�
 // 类似实现
 final class Box<A> {
   var unbox: A
-  init(_ value: A) {self.unbox = valeu }
+  init(_ value: A) {self.unbox = value }
+}
+```
+## existential
+一般来讲在 Swift 中我们不能把协议作为一个具体的类型，他们只能用来当作约束范型.
+
+```swift
+// 编译器会帮为协议生成一个 container：existential container
+// 下面代码类似：let type: Any<SomeProtocol>
+let type: SomeProtocol
+```
+
+## protocol 和 generic
+```swift
+func encode1(x: Encodable) {}
+func encode2<x: Encodable>(x: E) {}
+```
+这两个函数看起都是传入了一个 `Encodable` 的参数。但它们不同但是对于 encode1 函数编译器会把参数放到一个 existential container 容器中，会带来一定开销。
+而对于范型函数编译器会为参数生成一个特定的版本，性能和我们手动重载这个函数差不多。但缺点是会带来更长但编译时间和更大二进制程序。不过大多数情况下，我们可以忽略 existential contarner 带来但性能差异。
+
+## 类型消除器(type erasure) 和 Opaque Return
+这两者适合结合起来学习，相关的资料有很多，内容很多到时候可以另开一篇文章讲讲。
+talks: 
+- [Keep Calm and Type Erase On - Gwendolyn Weston](https://academy.realm.io/posts/tryswift-gwendolyn-weston-type-erasure/)
+- [Protocols with Associated Types - Alexis Gallagher](https://www.youtube.com/watch?v=XWoNjiSPqI8)
+articles:
+- [Understanding Opaque Return Types in Swift](https://www.alfianlosari.com/posts/understanding-opaque-return-type/)
+
+## 序列
+一个序列(Sequence)代表一组相同类型的值，满足 Sequence 协议的类型我们可以对其进行 for 循环等遍历操作。
+```swift
+public protocol Sequence {
+    /// A type representing the sequence's elements.
+    associatedtype Element where Self.Element == Self.Iterator.Element
+    /// A type that provides the sequence's iteration interface and
+    /// encapsulates its iteration state.
+    associatedtype Iterator : IteratorProtocol
+    /// Returns an iterator over the elements of this sequence.
+    func makeIterator() -> Self.Iterator
+    // ...
 }
 ```
