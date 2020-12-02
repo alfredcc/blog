@@ -125,3 +125,7 @@ public protocol Sequence {
 ## 编码和解码
 
 我们都知道标准库的很多基本类型都已经实现了 `Codable` ( Codable 是 Decodable 和 Encodebale 的 组合)。如果要让一个类或者结构体实现 `Codable` 我们只要保证他们内部的数据都分别实现 `Codable` 即可。这部分工作是编译器帮我实现的，他和标准库的默认实现不一样。假设我们要把这部分指责迁移到标准库中，这就需要 Swift 具有强大的反射能力（类似 OC 的一些运行时的能力，但这样做往往会产生一些而外的开销）。另外 Swift 很多其他语言特效都是这样做的，比如自动实现的 `Equatable` 和 `Hashable` 这也是编译 Swift 比 OC 慢很多的主要原因。
+
+> Tips: Swift 目前不能在类型定义之外自动合成实现 `Encodable`, 也就是说不能通过 extension 实现 Encodable。（要让 Swift 自动合成协议实现代码需要在将协议添加在类型定义的地方或者加载同文件下的 extension 中）
+
+在这里苹果工程师的建议是：*当你想要扩展别人的类型使其满足 `Encodable` 或者 `Decodable` 时，我们应该靠考虑用一个结构体封装起来，除非我们确定这个类型以后自己不会遵循这些协议。*$$
