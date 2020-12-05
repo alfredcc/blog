@@ -1,0 +1,703 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-US"><generator uri="https://jekyllrb.com/" version="4.1.1">Jekyll</generator><link href="https://jiechaoz.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://jiechaoz.com/" rel="alternate" type="text/html" hreflang="en-US" /><updated>2020-12-05T07:33:25+00:00</updated><id>https://jiechaoz.com/feed.xml</id><title type="html">Race Chao</title><subtitle>欢迎来到我的小小站点， 不定期给大家分享一些开发的小知识 &lt;a href=&quot;https://github.com/alfred&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;@github&lt;/a&gt;.</subtitle><author><name>racechao</name><email>racechao@gmail.com</email></author><entry><title type="html">Advanced Swift 学习笔记</title><link href="https://jiechaoz.com/advance-swift-learn-notes/" rel="alternate" type="text/html" title="Advanced Swift 学习笔记" /><published>2020-11-16T00:00:00+00:00</published><updated>2020-11-16T00:00:00+00:00</updated><id>https://jiechaoz.com/advance-swift-learn-notes</id><content type="html" xml:base="https://jiechaoz.com/advance-swift-learn-notes/">&lt;p&gt;一个优秀的程序员往往对技术层面的边界非常清楚，对这些边界的认知可以让我们知道什么技术用来解决什么问题。&lt;/p&gt;
+
+&lt;p&gt;在学习语言的过程中也是一样，只有清楚认识到各种语法以及编程语言语意上的不同之处及边界，才能让我们写出更好的代码。学习《Advanced Swift》这本书，希望可以提升自己对 swift 这门语言在这方面的认知，写出更好的代码。在读书的时候，虽然当我们遇到新的知识点会豁然开朗的感觉，但随着时间的流逝很多当时觉得耳目一新的知识点往往会被忘记，只有反复阅读才能慢慢吸收变成自己的知识。这也是我记录笔记的原因。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;如果文章内容有侵权的地方，请联系我&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;if-let&quot;&gt;if let&lt;/h2&gt;
+&lt;p&gt;if let 解包的一个 value type 的时候要注意解包后的值只是一份copy，改变的时候不影响原来的值&lt;/p&gt;
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;originInt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;originInt&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 3&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;originInt&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// 2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;flatmap-展平操作&quot;&gt;flatMap 展平操作&lt;/h2&gt;
+&lt;p&gt;flatMap 可以把结果展平为单个可选值&lt;/p&gt;
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;3&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;flatMap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Optional(1)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 等价于&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;first&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;3&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;first&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// 1&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;隐式可选值行为&quot;&gt;隐式可选值行为&lt;/h2&gt;
+&lt;p&gt;在 iOS 编程的世界中我们经常会看到 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@IBOutlet var contentView: UIView!&lt;/code&gt; 这样的代码，这是因为 ViewController 会延迟创建 view。这里有两个阶段:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;创建 ViewController 自身&lt;/li&gt;
+  &lt;li&gt;加载 outlet view。在这两个阶段之间 outlet 引用还未被创建。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;另外一个场景：因为我们的代码有时候会桥接 OC/C 的方法，OC 方法很久以前还没有引入可选值，但我们都知道 OC 的对象其实是一个引用（ptr指针），有时候这个引用会返回空。但大多数情况下都是有值的，所以为了书写方便就实现了隐式隐式可选值。&lt;/p&gt;
+
+&lt;h2 id=&quot;闭包的定义&quot;&gt;闭包的定义&lt;/h2&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;“在编程术语里，一个函数和它所捕获的变量环境组合起来被称为闭包”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;inout&quot;&gt;inout&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;inout 在 Swift 中其实不是引用传递，而是值传递，在函数结束的时候把新值 copy 回去。
+    &lt;blockquote&gt;
+      &lt;p&gt;“一个 inout 参数持有一个传递给函数的值，函数可以改变这个值，然后从函数中传出并替换掉原来的值。”&lt;/p&gt;
+    &lt;/blockquote&gt;
+  &lt;/li&gt;
+  &lt;li&gt;在闭包中不能让 inout 参数逃离（原因如上）&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;autoclosure&quot;&gt;autoclosure&lt;/h2&gt;
+&lt;p&gt;在编程语言中 &amp;amp;&amp;amp; 操作符的右边是延迟执行的，只有左边满足条件才会调用右边。因为 swift 函数是一等公民，我们可以用闭包（匿名函数）来实现这个“延迟执行”的功能，如下：&lt;/p&gt;
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;and&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;l&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bool&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bool&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bool&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;guard&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;l&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;r&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;但是在调用的时候就比较麻烦，需要在调用参数上加”{}”，比较好的是 swfit 加入了 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;@autoclosure&lt;/code&gt; 的语法糖，使得我们可以省略{}的写法。另外因为 closure 延迟的特性，我们的“参数方法”不一定会被执行到，我们应当谨慎使用。&lt;/p&gt;
+
+&lt;h2 id=&quot;struct&quot;&gt;struct&lt;/h2&gt;
+&lt;p&gt;struct 相比 class 更加轻量，没有继承，不能共享内存，也没有引用计数，但 struct 副作用很小，我们不用担心循环引用的问题，这样我们使得我们的程序更容易维护。
+当 struct 内部持有一个引用类型：这个时候这个 struct 赋值的时候，他内部这个引用类型的属性并不会完全拷贝一份，而仅仅只是复制了指针，此时的 struct 并不是完全意义上的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;value type&lt;/code&gt;。&lt;/p&gt;
+
+&lt;h2 id=&quot;写时复制&quot;&gt;写时复制&lt;/h2&gt;
+&lt;p&gt;我们都知道值类型在 swift 往往具有写时复制的特性，但不是所有值类型都具有“写时复制”的特性，在 swift 中大多数值类型都具有这个特性，那是因为 Foundation 帮我们实现来这个功能。但为了实现“写时复制”这个功能我们会依赖内部的一个引用计数，维护这份引用计数并不是那么“轻量”，因为我们要保证这个引用计数的线程安全，不能避免锁的开销（Swift 已经有 Atomic 相关的提案了，不知道未来是不是可以通过这个特性来优化）。&lt;/p&gt;
+
+&lt;p&gt;copy on write 内部实现是用了一个 private 的 class 来存储这个值类型的变量，然后通过变量 get set 的方式将内部class 的属性暴露出去。在 set 方法中调用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;copy()&lt;/code&gt; 来实现 copy on write。要注意的时候我们需要检查内部这个 class 的 storage 的引用是不是唯一的，因为如果是同一个引用，我们没必要在每次修改的时候都进行复制操作，那是一种资源的浪费。&lt;/p&gt;
+
+&lt;h2 id=&quot;indirect&quot;&gt;indirect&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/struct-recursively.png&quot; alt=&quot;img&quot; /&gt;
+我们在用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;struct&lt;/code&gt; 的时候如果属性包含了自己，会遇到 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Value type 'A' cannot have a stored property that recursively contains it&lt;/code&gt; 的错误。那是因为编译器对于值类型需要能够计算他内存布局的大小，这个大小是一个固定的有限的尺寸。假设我们可以包含自身，那就可能出现无限递归，编译器就不能确定大小了。&lt;/p&gt;
+
+&lt;p&gt;在枚举中我们可以用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;indirect&lt;/code&gt; 修饰，但仅适用于枚举。&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;indirect&lt;/code&gt; 可以用来告诉编译器将我们递归的成员作为一个引用（因为引用的大小是确定的，在64位的系统上是 8 个字节）。&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 类似实现&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Box&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;unbox&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;A&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;A&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;unbox&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;existential&quot;&gt;existential&lt;/h2&gt;
+&lt;p&gt;一般来讲在 Swift 中我们不能把协议作为一个具体的类型，他们只能用来当作约束范型.&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 编译器会帮为协议生成一个 container：existential container&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 下面代码类似：let type: Any&amp;lt;SomeProtocol&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;SomeProtocol&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;protocol-和-generic&quot;&gt;protocol 和 generic&lt;/h2&gt;
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;encode1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Encodable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;encode2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Encodable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;E&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;这两个函数看起都是传入了一个 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Encodable&lt;/code&gt; 的参数。但它们不同但是对于 encode1 函数编译器会把参数放到一个 existential container 容器中，会带来一定开销。
+而对于范型函数编译器会为参数生成一个特定的版本，性能和我们手动重载这个函数差不多。但缺点是会带来更长但编译时间和更大二进制程序。不过大多数情况下，我们可以忽略 existential contarner 带来但性能差异。&lt;/p&gt;
+
+&lt;h2 id=&quot;类型消除器type-erasure-和-opaque-return&quot;&gt;类型消除器(type erasure) 和 Opaque Return&lt;/h2&gt;
+&lt;p&gt;这两者适合结合起来学习，相关的资料有很多，内容很多到时候可以另开一篇文章讲讲。
+talks:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://academy.realm.io/posts/tryswift-gwendolyn-weston-type-erasure/&quot;&gt;Keep Calm and Type Erase On - Gwendolyn Weston&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=XWoNjiSPqI8&quot;&gt;Protocols with Associated Types - Alexis Gallagher&lt;/a&gt;
+articles:&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.alfianlosari.com/posts/understanding-opaque-return-type/&quot;&gt;Understanding Opaque Return Types in Swift&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;序列&quot;&gt;序列&lt;/h2&gt;
+&lt;p&gt;一个序列(Sequence)代表一组相同类型的值，满足 Sequence 协议的类型我们可以对其进行 for 循环等遍历操作。&lt;/p&gt;
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;protocol&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Sequence&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;/// A type representing the sequence's elements.&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;associatedtype&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Element&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;Self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Element&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;Self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Iterator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Element&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;/// A type that provides the sequence's iteration interface and&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;/// encapsulates its iteration state.&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;associatedtype&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Iterator&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;IteratorProtocol&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;/// Returns an iterator over the elements of this sequence.&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;makeIterator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;Self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Iterator&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;编码和解码&quot;&gt;编码和解码&lt;/h2&gt;
+
+&lt;p&gt;我们都知道标准库的很多基本类型都已经实现了 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Codable&lt;/code&gt; ( Codable 是 Decodable 和 Encodebale 的 组合)。如果要让一个类或者结构体实现 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Codable&lt;/code&gt; 我们只要保证他们内部的数据都分别实现 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Codable&lt;/code&gt; 即可。这部分工作是编译器帮我实现的，他和标准库的默认实现不一样。假设我们要把这部分指责迁移到标准库中，这就需要 Swift 具有强大的反射能力（类似 OC 的一些运行时的能力，但这样做往往会产生一些而外的开销）。另外 Swift 很多其他语言特效都是这样做的，比如自动实现的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Equatable&lt;/code&gt; 和 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Hashable&lt;/code&gt; 这也是编译 Swift 比 OC 慢很多的主要原因。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Tips: Swift 目前不能在类型定义之外自动合成实现 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Encodable&lt;/code&gt;, 也就是说不能通过 extension 实现 Encodable。（要让 Swift 自动合成协议实现代码需要在将协议添加在类型定义的地方或者加载同文件下的 extension 中）&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;在这里苹果工程师的建议是：&lt;em&gt;当你想要扩展别人的类型使其满足 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Encodable&lt;/code&gt; 或者 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Decodable&lt;/code&gt; 时，我们应该靠考虑用一个结构体封装起来，除非我们确定这个类型以后自己不会遵循这些协议。&lt;/em&gt;$$&lt;/p&gt;</content><author><name>racechao</name></author><category term="swift" /><summary type="html">一个优秀的程序员往往对技术层面的边界非常清楚，对这些边界的认知可以让我们知道什么技术用来解决什么问题。</summary></entry><entry><title type="html">Swift 中关于 Memberwise Initializer 的一个小技巧</title><link href="https://jiechaoz.com/memberwise-initializer/" rel="alternate" type="text/html" title="Swift 中关于 Memberwise Initializer 的一个小技巧" /><published>2020-09-09T00:00:00+00:00</published><updated>2020-09-09T00:00:00+00:00</updated><id>https://jiechaoz.com/memberwise-initializer</id><content type="html" xml:base="https://jiechaoz.com/memberwise-initializer/">&lt;p&gt;我们都知道在 Swift 的 Struct 中，如果我们不实现 init 方法，compile 会默认帮我们生成一个，官方文档把这叫作 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;memberwise initializer&lt;/code&gt;。当我的 model 中有很多 property 这就很方便了，不用写一个很长的 init() 函数。但是当我们自定义了一个初始化方法，这个“默认的”初始化方法就不能用了。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/memberwise.png&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;如果我们要同时保留两个方法，只要把自定义初始化方法放到 extension 即可。&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Foo&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;extension&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Foo&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;customInit&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bar&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kt&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;bar&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/yellow.gif&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;当然 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;memberwise initializer&lt;/code&gt; 也有很多其他限制, &lt;a href=&quot;https://forums.swift.org/t/state-of-the-memberwise-initializer/17168&quot;&gt;swift forums&lt;/a&gt; 论坛有提到过，大概有以下几点：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Defining a custom init in a struct disables the memberwise initializer, and there is no easy way to get it back.&lt;/li&gt;
+  &lt;li&gt;Access control + the memberwise init often requires you to implement it yourself.&lt;/li&gt;
+  &lt;li&gt;We don’t get memberwise inits for classes.&lt;/li&gt;
+  &lt;li&gt;var properties with default initializers should have their parameter to the synthesized initializer defaulted.&lt;/li&gt;
+  &lt;li&gt;lazy properties with memberwise initializers have problems (the memberwise init eagerly touches it).&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;详细内容可以在上面的链接看到，有具体的代码可以配合着看，更加容易理解。
+当然其中有一些约束和限制并不是缺点，反而正是因为这些限制使得我们可以写出更加安全的代码。&lt;/p&gt;</content><author><name>racechao</name></author><category term="swift Initializer" /><summary type="html">我们都知道在 Swift 的 Struct 中，如果我们不实现 init 方法，compile 会默认帮我们生成一个，官方文档把这叫作 memberwise initializer。当我的 model 中有很多 property 这就很方便了，不用写一个很长的 init() 函数。但是当我们自定义了一个初始化方法，这个“默认的”初始化方法就不能用了。</summary></entry><entry><title type="html">Not Embed/Embed &amp;amp; Sign/Embed Without Sign in Xcode</title><link href="https://jiechaoz.com/embed-framwork/" rel="alternate" type="text/html" title="Not Embed/Embed &amp; Sign/Embed Without Sign in Xcode" /><published>2020-09-03T00:00:00+00:00</published><updated>2020-09-03T00:00:00+00:00</updated><id>https://jiechaoz.com/embed-framwork</id><content type="html" xml:base="https://jiechaoz.com/embed-framwork/">&lt;p&gt;&lt;img src=&quot;/assets/img/xcode-embed.jpg&quot; alt=&quot;img&quot; /&gt;
+在 Xcode11 后 Apple 改了 Framwork 集成配置选项，把 Framwork Embed 方式分成了 3 种：&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Do Not Embed&lt;/code&gt;,&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Embed &amp;amp; Sign&lt;/code&gt; 以及 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Embed Without Sign&lt;/code&gt;
+Xcode11 出来之前一直没留意这里的配置是什么意思，所以刚好是自己的知识盲区，其实稍微了解下就明白这些配置是什么意思了，说下我的理解吧：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;动态库需要 Embed &amp;amp; Sign 是因为 link 发生在 runtime, 需要把库加载进来（需要用 Embedding 把 framework 打进 bundle 里）&lt;/li&gt;
+  &lt;li&gt;静态库不需要 Embed 是因为已经 link 好了，直接可以输出可执行文件&lt;/li&gt;
+  &lt;li&gt;系统的动态库不要 Emabed 是因为系统会 share 这些动态库， app 在 runtime 的时候直接 link 系统的就行了&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;另外发现 Carthage 打出来的库不用 Embed With Sign，所以去翻了下 Github &lt;a href=&quot;https://github.com/Carthage/Carthage/blob/fc0166b4827736bac2c804fc928797f1a742c455/Source/carthage/CopyFrameworks.swift#L49&quot;&gt;代码&lt;/a&gt;发现大概流程是在 Copy File 后会对 framwork 后对其 codesign。
+顺别解决了以前在使用 Carthage 的时候对于为什么要配置 input Files 和 output Files 的困惑。
+所以 Carthage 打出来的包不选 Embed &amp;amp; Sign 而是选 Not Embed（上面所诉的方式进行了 Copy 和 Sign 操作）
+而这些签名后的 Framwork 就可以使用 Embed without sign 了。&lt;/p&gt;
+
+&lt;p&gt;另外群里小伙伴提到 “这个 input 和 output 貌似可以优化 build 时间，里面有个 copy resource 的过程，会从这个 files 里面搜有没有命中的 path”
+关与 Carthage 为什么要使用&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;copy framworks&lt;/code&gt; 而不止直接使用 Xcode 自带的功能比如 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;xcfilelist&lt;/code&gt; ，可以看看这些 &lt;a href=&quot;https://github.com/Carthage/Carthage/issues/2605#issuecomment-427403929&quot;&gt;issue1&lt;/a&gt;,&lt;a href=&quot;https://github.com/Carthage/Carthage/issues/2477&quot;&gt;issue2&lt;/a&gt;
+我的理解这么做相当于加了一个中间层，Carthage 可以在过程中做很多优化比如下面提到的：&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;One advantage of the &quot;Input Files&quot;/&quot;Output Files&quot; mechanism built in to Xcode is that it will check timestamps of the input and output files and do nothing if the output file is already up-to-date. Ideally a tool that automatically sets the SCRIPT_INPUT_FILE_... and SCRIPT_OUTPUT_FILE_... environment variables could similarly check the timestamps and omit frameworks that are already up-to-date.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>racechao</name></author><category term="Xcode" /><summary type="html">在 Xcode11 后 Apple 改了 Framwork 集成配置选项，把 Framwork Embed 方式分成了 3 种：Do Not Embed,Embed &amp;amp; Sign 以及 Embed Without Sign Xcode11 出来之前一直没留意这里的配置是什么意思，所以刚好是自己的知识盲区，其实稍微了解下就明白这些配置是什么意思了，说下我的理解吧：</summary></entry><entry><title type="html">讲讲 static 关键字在 Swift 中的作用</title><link href="https://jiechaoz.com/static-keywords-in-swift/" rel="alternate" type="text/html" title="讲讲 static 关键字在 Swift 中的作用" /><published>2020-08-26T00:00:00+00:00</published><updated>2020-08-26T00:00:00+00:00</updated><id>https://jiechaoz.com/static-keywords-in-swift</id><content type="html" xml:base="https://jiechaoz.com/static-keywords-in-swift/">&lt;p&gt;今天和群里小伙伴讨论到 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;static&lt;/code&gt; ，发现自己并没有特别了解 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;static&lt;/code&gt; 这个关键字。
+我有两个疑问：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;在 Swift 中的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;static&lt;/code&gt; 究竟是什么?&lt;/li&gt;
+  &lt;li&gt;修饰了 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;static&lt;/code&gt; 的 property &lt;em&gt;初始化&lt;/em&gt;是否线程安全?&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;在-swift-中的-static-究竟是什么&quot;&gt;在 Swift 中的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;static&lt;/code&gt; 究竟是什么&lt;/h4&gt;
+
+&lt;p&gt;我们经常看到有的 Swift 中有的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;property&lt;/code&gt; 和 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;func&lt;/code&gt; 会用 static 修饰，他们其实有个官方的叫法是 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Type Property&lt;/code&gt; 和 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Type func&lt;/code&gt;。字面上理解就是属于 Type 的属性和方法（Swift 中 class 和 struct 都属于 Type）。&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;You can also define properties that belong to the type itself, not to any one instance of that type.&lt;br /&gt;
+– by Apple Document&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;那么 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Type Property&lt;/code&gt; 和 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Instance Property&lt;/code&gt; 究竟有什么区别呢?看看官方文档的解释&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Instance properties are properties that belong to an instance of a particular type. Every time you create a new instance of that type, it has its own set of property values, separate from any other instance.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;意思就是 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Instance properties&lt;/code&gt; 是和具体的实例相关的，你创建了多少个实例就会有多少个不同的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;properties&lt;/code&gt;.而 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Type Property&lt;/code&gt; 就不一样了，他是 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;one copy&lt;/code&gt; 的，简单理解就是只会有一份内存拷贝，在类型之间是共享的。另外有个特性就是&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;惰性赋值&lt;/code&gt;，在第一次被访问的时候才会初始化。&lt;/p&gt;
+
+&lt;h4 id=&quot;修饰了-static-的-property-初始化是否线程安全&quot;&gt;修饰了 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;static&lt;/code&gt; 的 property &lt;em&gt;初始化&lt;/em&gt;是否线程安全？&lt;/h4&gt;
+
+&lt;p&gt;结论很简单，是线程安全的，因为上面的提到的修饰 static 的 Property 都是 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;one copy&lt;/code&gt; 的。
+不信看代码：我们看到堆栈里面有个 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;swift_once&lt;/code&gt; 的方法，他保证了我们的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Type Property&lt;/code&gt; 不管是用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;let&lt;/code&gt; 还是 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;var&lt;/code&gt; 修饰的都只会被初始化一次。所以大家也就明白 Swift 中的单列为啥可以这么写了：&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;static let shared = SharedClass()&lt;/code&gt; 
+&lt;img src=&quot;/assets/img/static-in-swift-01.png&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;总结&quot;&gt;总结&lt;/h4&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;被 static 修饰的 property 叫做 Type Property（也叫 Stored type properties）&lt;/li&gt;
+  &lt;li&gt;不管用 let 还是 var 修饰的 Type Property &lt;em&gt;初始化&lt;/em&gt;都是线程安全的。修饰了 static 的 property（Type Property）都会调用 swift_once 函数，确保只初始化一次 (文档里叫 one copy)。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;参考文档：https://docs.swift.org/swift-book/LanguageGuide/Properties.html&lt;/p&gt;</content><author><name>racechao</name></author><category term="swift static" /><summary type="html">今天和群里小伙伴讨论到 static ，发现自己并没有特别了解 static 这个关键字。 我有两个疑问： 在 Swift 中的 static 究竟是什么? 修饰了 static 的 property 初始化是否线程安全?</summary></entry><entry><title type="html">博客优化和迁移，我却采坑了个大坑</title><link href="https://jiechaoz.com/move-to-github-actions/" rel="alternate" type="text/html" title="博客优化和迁移，我却采坑了个大坑" /><published>2020-08-16T00:00:00+00:00</published><updated>2020-08-16T00:00:00+00:00</updated><id>https://jiechaoz.com/move-to-github-actions</id><content type="html" xml:base="https://jiechaoz.com/move-to-github-actions/">&lt;p&gt;&lt;img src=&quot;/assets/img/github-actions.jpg&quot; alt=&quot;Cloudflare architecture&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;因为之前博客一直用的 &lt;a href=&quot;https://netlify.com/&quot;&gt;netlify&lt;/a&gt; 托管，测试了一段时间，访问速度不是很理想，基本等于不可用的状态。所以就趁这个周末，把网址迁移到 Github Pages。&lt;/p&gt;
+
+&lt;h1 id=&quot;build-脚本迁移到-github-actions&quot;&gt;Build 脚本迁移到 Github Actions&lt;/h1&gt;
+&lt;p&gt;一直听说 Github Actions 挺香的，而且有免费 2000 分钟的额度，故打算将 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Build&lt;/code&gt; 从 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Netlify&lt;/code&gt; 迁移 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Github Actions&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;迁移过程也挺简单的，具体可以参考&lt;a href=&quot;https://jekyllrb.com/docs/continuous-integration/github-actions/&quot;&gt;Jekyll 的官方教程&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;在 .github/workflows 目录下创建 github-pages.yml 文件&lt;/li&gt;
+  &lt;li&gt;打开文件并输入已下内容&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Build and deploy Jekyll site to GitHub Pages&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;branches&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;master&lt;/span&gt;
+
+&lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;github-pages&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ubuntu-16.04&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@v2&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;helaili/jekyll-action@2.0.1&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+          &lt;span class=&quot;na&quot;&gt;JEKYLL_PAT&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;这里会自动将生成的静态博客文件 push 到 hg-page 分支
+并且每次 build 完之后会清空之前的所有文件&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h1 id=&quot;自定义域名&quot;&gt;自定义域名&lt;/h1&gt;
+
+&lt;h4 id=&quot;1-购买域名&quot;&gt;1. 购买域名&lt;/h4&gt;
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Github Pages&lt;/code&gt; 支持自定义域名，因为 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Github Pages&lt;/code&gt; 免费的域名看起来不太爽，而且自己的博客当然得有自己的域名。于是去 &lt;a href=&quot;namecheap.com&quot;&gt;namecheap&lt;/a&gt; 上购买域名，这里吐槽下 GoDaddy 啃爹定价策略，第一年的价格虽然看起来还可以，但仔细看你会发现第二签续费贼坑。而且 namecheap 还可以在网上收集到 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;promo code&lt;/code&gt; 可以优惠不少。&lt;/p&gt;
+
+&lt;h4 id=&quot;2-域名解析托管&quot;&gt;2. 域名解析托管&lt;/h4&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Cloudflare&lt;/code&gt; 就不用多介绍了，购买完域名的第一件事就是将域名解析服务迁移到 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Cloudflare&lt;/code&gt;，另外 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Cloudflare&lt;/code&gt; 提供免费的 ssl 证书所以就不用再自己创建 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Let's Encrypt&lt;/code&gt; 的 ssl 证书了。
+这里最主要的一步就是在 DNS 解析中配一条 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CANME&lt;/code&gt; 指向我的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Github Page&lt;/code&gt; 的记录即可。&lt;/p&gt;
+
+&lt;h4 id=&quot;3-github-pages-自定义域名配置&quot;&gt;3. Github Pages 自定义域名配置&lt;/h4&gt;
+&lt;p&gt;方案一：然后就是在项目 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Setting&lt;/code&gt; 里面修改 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GitHub Pages &lt;/code&gt; 的自定义域名如下：
+&lt;img src=&quot;/assets/img/github-pages.png&quot; alt=&quot;img&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;方案二：在项目根目录添加 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;CNAME&lt;/code&gt; 文件，在里面输入自定义域名 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jiechaoz.com&lt;/code&gt;。&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;GitHub Pages&lt;/code&gt; 会自动检测这个文件去设置自定义域名&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;注意 CNAME 里面只有一条记录可以生效，换句话说你只能输入一个自定义域名地址&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;4-强制开启-https&quot;&gt;4. 强制开启 HTTPS&lt;/h4&gt;
+&lt;p&gt;因为安全策略，用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Chrome&lt;/code&gt; 在访问 HTTP 网页的时候会报错，所以需要强制将 HTTP 跳转到 HTTPS。如果我们网站有 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Nginx&lt;/code&gt; 的话，简单配个规则就行了，但是我的博客是托管在 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Github Pages&lt;/code&gt; 上的，那就得试试其他办法。&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Github Pages&lt;/code&gt; 可以强制开启 HTTPS，但似乎得需要自己申请 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Let's Encrypt&lt;/code&gt;（默认是不可选的），最后 Google 了一下，其实我们配个 meta 标签就行了。&lt;/p&gt;
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;http-equiv=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Content-Security-Policy&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;upgrade-insecure-requests&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h1 id=&quot;canme-的坑&quot;&gt;CANME 的坑&lt;/h1&gt;
+&lt;p&gt;这个真是被自己坑到了，因为上面说到我们用的 Github Action 配置每次 build 会把 gh-pages 分支所有文件清空，所以之前添加的 CNAME 在执行完后就不见了，网上搜了一圈发现解决办法是只要在主分支根目录创建一个 CNAME 就可以了，每次执行完后会自动拷贝到 gh-pages 分支下，但我试了好几次并没发现 CNAME 被拷贝，也尝试自己修改 Github Actions 脚本，直接执行 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;touch CNAME&amp;amp;echo &quot;jiechaoz.com&quot; &amp;gt; CNAME&lt;/code&gt; 发现也没效果。试了好久最后发现自己在 Jekyll &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt; 配置文件下把 CNAME 给 exclude 掉了。&lt;/p&gt;
+
+&lt;p&gt;最后大功告成！
+测试了下速度，基本访问速度在 1s 之内，比之前 &lt;a href=&quot;https://netlify.com/&quot;&gt;netlify&lt;/a&gt; 快多了。&lt;/p&gt;</content><author><name>racechao</name></author><category term="github actions" /><summary type="html"></summary></entry><entry><title type="html">如何设计你的网络请求</title><link href="https://jiechaoz.com/build-your-network/" rel="alternate" type="text/html" title="如何设计你的网络请求" /><published>2020-06-27T16:34:00+00:00</published><updated>2020-06-27T16:34:00+00:00</updated><id>https://jiechaoz.com/build-your-network</id><content type="html" xml:base="https://jiechaoz.com/build-your-network/">&lt;h2 id=&quot;概述&quot;&gt;概述&lt;/h2&gt;
+&lt;p&gt;几乎所有的项目都需要网络请求，因为他可以给用户呈现更加丰富的内容，方便我们在不同设备之间管理同步数据。网络请求会出现在你项目的各个地方：启动页，列表页，登录注册…所以如何管理组织网络请求是 App 架构中非常重要的一部分。Github 上也有类似的框架比如 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Moya&lt;/code&gt;, 我们且称其为网络框架的框架吧。&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Moya&lt;/code&gt; 也有这个框架也发展了很久了，功能很强大，社区也一直很活跃，也有衍生的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RxMoya&lt;/code&gt; 和 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ReactiveMoya&lt;/code&gt; 。但我在使用过后发现他过于 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;重&lt;/code&gt; 了，一直觉得他那种 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;path&lt;/code&gt; + &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;method&lt;/code&gt; + &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;parameter&lt;/code&gt; 拆开的写法太过于繁琐，那么本文就让我们来一步步搭建适合自己的网络框架吧。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;提示：为了方便和通用，我们的网络请求 API 就直接基于 Alamofire 来写好了。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;方法&quot;&gt;方法&lt;/h2&gt;
+&lt;p&gt;首先我们来看看最简单的请求长什么样？&lt;/p&gt;
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;AF&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://httpbin.org/get&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;debugPrint&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;非常简单对不对？但现实并不是这样，在一个请求中我们需要处理各种疑难杂症，最终一个请求的代码可能会很长很长（长到一个屏幕都放不下！），所以我们要尽量抽象和复用这里的逻辑。&lt;/p&gt;
+
+&lt;p&gt;如何下手呢？解决一个问题的最常用的方法就是先看清楚问题，然后把大问题拆成小问题，再一个个解决。我们先来思考下🤔，一个完整请求要做的事情什么：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;将 url，method，body 封装成一个 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HTTP Request&lt;/code&gt; 对象，&lt;/li&gt;
+  &lt;li&gt;设置请求的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HTTP Header &lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;接受 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HTTP Request&lt;/code&gt; 回来的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;data&lt;/code&gt; 数据&lt;/li&gt;
+  &lt;li&gt;处理 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;error&lt;/code&gt; 和 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;response code&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;通过 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;codable&lt;/code&gt; 之类的框架将 raw data 转换 model 对象&lt;/li&gt;
+  &lt;li&gt;请求重试&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;在常规的业务中，2、3、4、5 往往是可以统一抽象处理的，而最常见做法就是用一个 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;HTTPClient&lt;/code&gt; 或 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;APIManager&lt;/code&gt; 来统一 handle 这类逻辑了。而对于 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;1&lt;/code&gt; 每个请求的参数、地址、方法都不一样所以我们还是会将他们暴露出去，最终大概长这样：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;warning：下面方法只是替提供思路，部分代码被省略&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;HTTPClient&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  
+  &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;host&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;
+  
+  &lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;host&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;host&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;host&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  
+  &lt;span class=&quot;c1&quot;&gt;// 设置 timeout&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;sessionManager&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;SessionManager&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;config&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;URLSessionConfiguration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;default&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;timeoutIntervalForRequest&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;sessionManager&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;SessionManager&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;configuration&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sessionManager&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}()&lt;/span&gt;
+  
+  &lt;span class=&quot;c1&quot;&gt;// 设置 HTTPHeaders&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;defaultHeader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;HTTPHeaders&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;defaultHTTPHeaders&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;SessionManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;defaultHTTPHeaders&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;defaultHTTPHeaders&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;User-Agent&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;You device user agent&quot;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;defaultHTTPHeaders&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Accept-Encoding&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;acceptEncoding&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// 在 header 中添加 token &lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;defaultHTTPHeaders&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;extension&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;HTTPClient&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;@discardableResult&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requestObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Codable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                 &lt;span class=&quot;nv&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Alamofire&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;HTTPMethod&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                                 &lt;span class=&quot;nv&quot;&gt;parameters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?]?,&lt;/span&gt;
+                                 &lt;span class=&quot;nv&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;@escaping&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Request&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// json -&amp;gt; model&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;buidRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;parameters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;parameters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;weak&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;](&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dataSource&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;error&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;error&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;// 通过 `codable` 框架将 raw data 转换 model 对象&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dataSource&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;mapObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Response&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;error&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;parseError&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;HTTPClientError&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;code&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;decodeError&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;localDescrition&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;parse_error&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;localized&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;showDecodingError&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;nf&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;parseError&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// MARK: - Private Methods&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;extension&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;HTTPClient&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;/// note: data used by codable&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;typealias&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CompletionHandler&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?),&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Void&lt;/span&gt;
+  
+  &lt;span class=&quot;kd&quot;&gt;@discardableResult&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;buidRequest&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                           &lt;span class=&quot;nv&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Alamofire&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;HTTPMethod&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+                           &lt;span class=&quot;nv&quot;&gt;parameters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?]?,&lt;/span&gt;
+                           &lt;span class=&quot;nv&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;@escaping&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;CompletionHandler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Request&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    
+    &lt;span class=&quot;c1&quot;&gt;// filter nil value&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;validParas&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;parameters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;compactMapValues&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$0&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;request&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sessionManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;host&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;parameters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;validParas&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;headers&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;defaultHeader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;responseJSON&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;// 4. 处理 error 和 response code&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;handelResponse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;response&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;最后我们发起请求的方法大概长这样：&lt;/p&gt;
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;auth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;AuthResult&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;wp-json/wc/v3/third/party/access/token&quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;parameters&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;from&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;from&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;third_access_token&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;HTTPClient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shared&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;requestObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;parameters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;parameters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;rxswift-真香系列&quot;&gt;RxSwift 真香系列😋&lt;/h2&gt;
+&lt;p&gt;不会 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;RxSwift&lt;/code&gt; 建议大家都去学一啦，响应式编程真的很棒棒&lt;/p&gt;
+&lt;h4 id=&quot;如何支持-rxswift&quot;&gt;如何支持 RxSwift&lt;/h4&gt;
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;extension&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;HTTPClient&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ReactiveCompatible&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;extension&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Reactive&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;where&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Base&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;HTTPClient&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;/// Designated request-making method.&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;///&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;/// - Parameters:&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;///   - path: url path&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;///   - parameters: A dictionary of parameters to apply to a `URLRequest`&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;/// - Returns: Response of singleobject.&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;requestObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Codable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;HTTPMethod&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;parameters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?]?)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Single&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Single&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;single&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;request&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;base&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;requestObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;method&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;parameters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;parameters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;error&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;error&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;nf&quot;&gt;single&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;nf&quot;&gt;single&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;success&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+      
+      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Disposables&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;create&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;request&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;cancel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;重试和请求合并&quot;&gt;重试和请求合并&lt;/h4&gt;
+&lt;p&gt;得益与 RxSwift 重试和请求合并非常简单。&lt;/p&gt;
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 请求合并&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;Observable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;zip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;request1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;request3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;subscribe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;onNext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;resp1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resp2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;resp3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;disposed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;by&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;disposeBag&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// 请求重试 &lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;HTTPClient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rx&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;asObservable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;catchErrorJustReturn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;retry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;constant&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+  &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;disposed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;by&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;disposeBag&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// RxSwift+Retry&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;enum&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;DelayOptions&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;immediate&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;constant&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Double&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;exponential&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;initial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Double&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;multiplier&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Double&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;maxDelay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Double&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;custom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;closure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Double&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;extension&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;DelayOptions&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;make&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;attempt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Double&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;switch&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;immediate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.0&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;constant&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;time&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;exponential&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;initial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;multiplier&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;maxDelay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;// if it's first attempt, simply use initial delay, otherwise calculate delay&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;delay&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attempt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;initial&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;initial&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;pow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;multiplier&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Double&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attempt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;min&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;maxDelay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;custom&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;closure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;closure&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attempt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;/// 主要是用于网络请求的重试，可以设置重试次数，重试之间的间隔，以及有网络开始重试的逻辑&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;/// reference:http://kean.github.io/post/smart-retry&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;extension&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;ObservableType&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;/// Retries the source observable sequence on error using a provided retry&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;/// strategy.&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;/// - parameter maxAttemptCount: Maximum number of times to repeat the&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;/// sequence. `Int.max` by default.&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;/// - parameter didBecomeReachable: Trigger which is fired when network&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;/// connection becomes reachable.&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;/// - parameter shouldRetry: Always returns `true` by default.&lt;/span&gt;
+  &lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;retry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;maxAttemptCount&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+             &lt;span class=&quot;nv&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;DelayOptions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+             &lt;span class=&quot;nv&quot;&gt;didBecomeReachable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Observable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Void&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Reachability&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shared&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;didBecomeReachable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+             &lt;span class=&quot;nv&quot;&gt;shouldRetry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;@escaping&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bool&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Observable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Element&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;retryWhen&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;errors&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Observable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Error&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+      
+      &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;errors&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;enumerated&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;flatMap&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attempt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;error&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Observable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Void&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;in&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;guard&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;shouldRetry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt;
+          &lt;span class=&quot;n&quot;&gt;maxAttemptCount&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;attempt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;timer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Observable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+          &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;timer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;RxTimeInterval&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;seconds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;make&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;attempt&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))),&lt;/span&gt;
+                 &lt;span class=&quot;nv&quot;&gt;scheduler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;MainScheduler&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;instance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+          &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;map&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+        
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Observable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;merge&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;timer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;didBecomeReachable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h2 id=&quot;总结&quot;&gt;总结&lt;/h2&gt;
+
+&lt;p&gt;对我来说要做好一份适用性很强的网络架构不是一件很容易的事情，实际上网络请求的复杂度远远不止于此，这里做的仅仅是把一些通用逻辑统一处理，还有很多本文没有讲到。比如&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;如何用单一功能原则（Single responsibility principle）优化这里的逻辑&lt;/li&gt;
+  &lt;li&gt;当我们遇到服务端返回的不标准的数据结构怎么处理？&lt;/li&gt;
+  &lt;li&gt;使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Codable&lt;/code&gt; 区分返回的是 Array 还是 Object 是要不同处理的&lt;/li&gt;
+  &lt;li&gt;当我们有多个 API 地址比如测试环境和正式环境，那么我们如何去管理？&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;这些都是我们需要去解决的。我当初也踩了无数坑，太难了。
+这些问题先留给大家思考吧😆&lt;/p&gt;
+
+&lt;h2 id=&quot;参考&quot;&gt;参考&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://speakerdeck.com/onevcat/wang-lu-zhi-nan-nan-yu-shang-qing-tian-iplayground-2019?slide=143&quot;&gt;最后还是大力推荐下喵神在台湾 iPlayground 的演讲&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=Xk4HZfW6vK0&quot;&gt;https://www.youtube.com/watch?v=Xk4HZfW6vK0&lt;/a&gt;&lt;/p&gt;</content><author><name>racechao</name></author><category term="ios" /><category term="networking" /><category term="RxSwift" /><summary type="html">概述 几乎所有的项目都需要网络请求，因为他可以给用户呈现更加丰富的内容，方便我们在不同设备之间管理同步数据。网络请求会出现在你项目的各个地方：启动页，列表页，登录注册…所以如何管理组织网络请求是 App 架构中非常重要的一部分。Github 上也有类似的框架比如 Moya, 我们且称其为网络框架的框架吧。Moya 也有这个框架也发展了很久了，功能很强大，社区也一直很活跃，也有衍生的 RxMoya 和 ReactiveMoya 。但我在使用过后发现他过于 重 了，一直觉得他那种 path + method + parameter 拆开的写法太过于繁琐，那么本文就让我们来一步步搭建适合自己的网络框架吧。</summary></entry><entry><title type="html">2020年如何搭建一个适合自己的 blog</title><link href="https://jiechaoz.com/build-my-blog/" rel="alternate" type="text/html" title="2020年如何搭建一个适合自己的 blog" /><published>2020-06-21T13:34:00+00:00</published><updated>2020-06-21T13:34:00+00:00</updated><id>https://jiechaoz.com/build-my-blog</id><content type="html" xml:base="https://jiechaoz.com/build-my-blog/">&lt;p&gt;&lt;img src=&quot;/assets/img/desktop.jpg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;经历了两天的折腾终于把我的博客搭建成功了👏🧨。
+整个过程虽然踩了很多坑，但最终的结果很令我满意，而且这个过程也是一个非常值得分享的事情。先简单介绍下我的博客主要使用 Jekyll + Github + Netlify + VSCode（用来写 Markdown）的框架来搭建，然后就直接上正菜吧！&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;直白的“来承上启下”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;静态网站生成器&quot;&gt;静态网站生成器&lt;/h2&gt;
+
+&lt;p&gt;都 2020 年了，搭建一个博客当然是非常简单的事情。不需要什么复杂的框架，也不需要购买服务器，直接把生成静态文件丢到 CDN 就好了，性能又高，维护成本又低，而且更加安全。当然如果要自己搭服务器当然也可以，但国内的环境我就不说了，备案各种事情会让你崩溃，可以看下之前公司小伙伴&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;萌哥&lt;/code&gt;的辛酸史 &lt;a href=&quot;https://mengtnt.com/2020/02/11/submit-domain.html&quot;&gt;申请域名的艰难之路&lt;/a&gt; 。&lt;/p&gt;
+
+&lt;p&gt;继续说说静态网站生成器，这个名词很早就有了，感兴趣的小伙伴可以听下 &lt;a href=&quot;https://pan.icu/3&quot;&gt;内核恐慌的这期&lt;/a&gt; 节目。现在大多的开源博客软件都用到了之类的技术，这种方案其实就是之前比较火的 &lt;a href=&quot;https://jamstack.org/&quot;&gt;JAMStack&lt;/a&gt;。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;JAMStack（JAM 代表 &lt;strong&gt;J&lt;/strong&gt;avaScript，&lt;strong&gt;A&lt;/strong&gt;PI 和 &lt;strong&gt;M&lt;/strong&gt;arkup）是一种使用 &lt;a href=&quot;https://link.zhihu.com/?target=https%3A//www.staticgen.com/&quot;&gt;Static Site Generators&lt;/a&gt; (SSG) 技术、不依赖 &lt;strong&gt;Web Server&lt;/strong&gt; 的前端架构。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;目前比较流行的博客搭建框架有 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Jekyll, Hugo, Nuxt, Next, Gatsby&lt;/code&gt;，至于我为什么用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Jekyll&lt;/code&gt; 呢？其实我自己也没有仔细横向比对过，主要原因可能是我比较喜欢 Ruby 这门语言吧（确切的说应该是 ruby 社区的开源精神/文化）。之前看喵神也把博客迁回了 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Jekyll&lt;/code&gt; 所以就毫不犹豫选了它。&lt;/p&gt;
+
+&lt;h2 id=&quot;数据管理和迁移&quot;&gt;数据管理和迁移&lt;/h2&gt;
+
+&lt;p&gt;以前很多小伙伴用了 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;WordPress&lt;/code&gt; 去搭建博客，既要架服务器，又要搭建数据库，一旦需要迁移站点就非常痛苦，你一波骚操作有可能把辛苦写的文章数据都删除了。但因为我们使用的是 JAMStack 方案，根本不存在数据库，而且所有文章都有 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git&lt;/code&gt; 提交记录（除非你把 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;git&lt;/code&gt; 项目删了），所以不太可能丢数据。迁移的时候只要简单的 Copy/Poast 相关文章的文件就可以了。&lt;/p&gt;
+
+&lt;h2 id=&quot;流程自动化&quot;&gt;流程自动化&lt;/h2&gt;
+
+&lt;p&gt;由于我们使用了&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;静态网站生成器&lt;/code&gt;每次写完文字都需要运行一遍 build 命令(比如&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;jekyll build&lt;/code&gt;)重新生成一遍静态资源。所以就需要把这些重复的流程自动化，也就是 CI 自动部署。我用的是 Netlify 的免费版（300 次 build 的免费额度对于我这个可能月更的博客站点完全够用了），而且配置非常简单：直接向 Github 授权，然后选择你的 blog 项目就可以了，如果你项目使用了 Jekyll ，Netlify 会自动识别到，并且默认就帮你配置好了 Build 选项，简直黑科技！&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/netlify-build.png&quot; alt=&quot;netlify-build&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;当然我们也可以使用 &lt;a href=&quot;https://jekyllrb.com/docs/continuous-integration/github-actions/&quot;&gt;Github Action&lt;/a&gt; 来做 CI 也很香。这样我们写完博客直接往 Github 上一提交，系统就自动帮我们生成好静态资源并部署到 CDN 上了。&lt;/p&gt;
+
+&lt;h2 id=&quot;评论系统&quot;&gt;评论系统&lt;/h2&gt;
+&lt;p&gt;之前看到很多博客站使用 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;disqus&lt;/code&gt; 虽然集成也方便，但是广告多加载又慢，当我看到 &lt;a href=&quot;https://utteranc.es/&quot;&gt;utterances&lt;/a&gt; 这个开源工具就爱上了，果断放弃 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;disqus&lt;/code&gt;，&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;utterances&lt;/code&gt;是一款基于 GitHub issues 的评论工具，优点如下：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;轻量&lt;/li&gt;
+  &lt;li&gt;加载非常快&lt;/li&gt;
+  &lt;li&gt;配置简单&lt;/li&gt;
+  &lt;li&gt;这种 ✨✨设计风格的 logo 很符合我的胃口&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;静态资源托管&quot;&gt;静态资源托管&lt;/h2&gt;
+&lt;p&gt;因为我们的网站是托管在 CDN 上的，访问速度的快慢主要就依赖你所托管的 CDN 服务商的速度，所以如果我们想优化国内的访问速度就需要尽量选择国内的托管服务（可惜好像没有特别好的）。&lt;/p&gt;
+
+&lt;p&gt;具体你可以参考这里:
+&lt;a href=&quot;https://github.com/lmk123/blog/issues/55&quot; target=&quot;_blank&quot; rel=&quot;&quot;&gt;介绍一些免费好用的静态网站托管服务&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;最后&quot;&gt;最后&lt;/h2&gt;
+&lt;p&gt;整个过程搭建完毕，然后我们只要打开熟悉的 VSCode 安装上 markdown 插件就可以愉快的写博客啦。&lt;/p&gt;
+
+&lt;p&gt;当然如果你想更加深度定制你的 blog 网站，作为一个程序员👨‍💻‍肯定难不倒你，我们可以基于一些开源的 Theme 上做适当的修改，比如加一个侧边栏，给头像增加一点动效等（笔者也在这个主题上定制了一些自己的需求并且提交了 PR）。另外我们也可以用一些 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Serverless&lt;/code&gt; 的服务比如 &lt;a href=&quot;https://cloud.google.com/functions&quot;&gt;google cloud function&lt;/a&gt; 用来弥补我们没有后端的尴尬场面，具体需求就靠大家自由发挥才智了。&lt;/p&gt;
+
+&lt;p&gt;推荐一些相关资源：
+&lt;a href=&quot;https://jamstackthemes.dev/ssg/jekyll/&quot;&gt;Jekyll Themes&lt;/a&gt;&lt;/p&gt;</content><author><name>racechao</name></author><category term="Jekyll" /><category term="Netlify" /><summary type="html"></summary></entry><entry><title type="html">iOS Keyboard Extension Tips</title><link href="https://jiechaoz.com/keyboard-extension-tips/" rel="alternate" type="text/html" title="iOS Keyboard Extension Tips" /><published>2020-06-19T14:34:00+00:00</published><updated>2020-06-19T14:34:00+00:00</updated><id>https://jiechaoz.com/keyboard-extension-tips</id><content type="html" xml:base="https://jiechaoz.com/keyboard-extension-tips/">&lt;p&gt;&lt;img src=&quot;/assets/img/keyboard.jpg&quot; alt=&quot;keyboard_architecture_2x.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Apple 在 iOS 8 里就引入了 Keyboard Extension，但网上相关但开发但资料很少，我在开发中也遇到了不少坑，为了给大家分享下这方面但知识，所以才有了这篇文章。
+Custom Keyboard 要实现起来也非常简单，我们只需要在项目里新建一个 Custom Keyboard Extension 的 Target，Xcode 就自动会给我们创建一个 KeyboardViewController，开发者通过这个类就可以做简单的开发了。但是往往实际情况并没有那么简单。我们可能需要在键盘请求网络数据，或者和Containing App 通信等等，这时我们会遇到很多问题。这边文章我会讲述一下常见的问题和解法。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;概要&quot;&gt;概要&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Extension 如何通讯&lt;/li&gt;
+  &lt;li&gt;检测键盘是否已经添加&lt;/li&gt;
+  &lt;li&gt;检测键盘是否激活&lt;/li&gt;
+  &lt;li&gt;播放系统声音&lt;/li&gt;
+  &lt;li&gt;检测是否已经获取（最高访问权限） RequestsOpenAccess&lt;/li&gt;
+  &lt;li&gt;键盘切换方法&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;extension-如何通讯&quot;&gt;Extension 如何通讯&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/img/open-url.jpg&quot; alt=&quot;detailed_communication_2x.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这是苹果官方给出的一张图，Containing App 是我们的主 App, Host app 是 Extension 所运行的第三方 App（比如微信），为了方便理解下面我们会把 Containing App 称为“主 App”，Host App 称为“第三方 App”。&lt;/p&gt;
+
+&lt;p&gt;总结如下：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;App extension 无法直接与主 App 通信（简单的理解它们就是两个不同的进程，extension 启动了并不代表主App也会启动）&lt;/li&gt;
+  &lt;li&gt;App extension 可以通过 open URL 和主 App通信，但这条链路只是单向的（因为App extension 没有 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;openURL&lt;/code&gt;  之类接受消息的入口）&lt;/li&gt;
+  &lt;li&gt;主 App 和 App extension 可以通过读写共同的文件资源来通信（比如 UserDefault, 前提需要加到同一个 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;AppGroups&lt;/code&gt; ）&lt;/li&gt;
+  &lt;li&gt;另外一个官方没提到的方法：可以用更底层的 DarwinNotify 来建立 Extension 和 Containing app 之间的通讯，可以参考下面的👇开源库&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/choefele/CCHDarwinNotificationCenter&quot;&gt;choefele/CCHDarwinNotificationCenter&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;通过 App Groups 共同维护 UserDefault 是一种比较简单的通讯方法。但是开发者也需要注意的是如果我们的键盘没有获取到没有完全访问权限，键盘是只能读取，没法修改 UserDefault 的值的（如果这个 UserDefault 是 Containing app 创建的）。另外一点是 DarwinNotify 现在同样也需要完全访问权限了。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;最后给大家一个忠告： 千万一定要在真机上调试！&lt;/p&gt;
+
+&lt;h3 id=&quot;检测键盘是否已经添加&quot;&gt;检测键盘是否已经添加&lt;/h3&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;isKeyboardEnabled&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bool&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;guard&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;keyboards&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UserDefaults&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;standard&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;object&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;forKey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;AppleKeyboards&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as?&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keyboards&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;contains&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;你的 extension bundle id&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;检测键盘是否已激活&quot;&gt;检测键盘是否已激活&lt;/h3&gt;
+
+&lt;p&gt;键盘类型的应用往往有个需求是：当用户第一次切换到我们开发的 Keyboard，需要在主 App 显示欢迎👏图文或者开启引导流程。我们可以通过 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;openURL&lt;/code&gt; 的方式来通知主App。&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Step1: 在 keyboard 中调用&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 打开主APP，比如 openURL(scheme:&quot;yourAppScheme://actived&quot;)&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;openURL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;scheme&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;url&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;URL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scheme&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;context&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;NSExtensionContext&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;context&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;completionHandler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;responder&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIResponder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;selectorOpenURL&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sel_registerName&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;openURL:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;responder&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;responder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;responds&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;selectorOpenURL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;responder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;perform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;selectorOpenURL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;responder&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;responder&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;next&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;// step2:&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// app 在前台的时候接收通知&lt;/span&gt;
+&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;application&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIApplication&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;open&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;URL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; 
+               &lt;span class=&quot;nv&quot;&gt;options&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;UIApplication&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;OpenURLOptionsKey&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Any&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[:])&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bool&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;scheme&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;yourAppScheme&quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;host&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;actived&quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// do something&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这里要注意的是openURL 会唤起主 App（如果主 App 不在前台），所以这里需要额外做判断。&lt;/p&gt;
+
+&lt;h3 id=&quot;播放系统声音&quot;&gt;播放系统声音&lt;/h3&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 直接上代码&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 点击: SystemSoundID = 1123&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 删除按钮: SystemSoundID = 1155&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;// 系统键盘: SystemSoundID = 1156&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;AudioServicesPlaySystemSound&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;SystemSoundID&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;检测是否已经获取最高访问权限-requestsopenaccess&quot;&gt;检测是否已经获取（最高访问权限） RequestsOpenAccess&lt;/h3&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// Keyboard Extension&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;hasFullAccess&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bool&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;#available(iOS 11.0, *)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hasFullAccess&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;// super is UIInputViewController.&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;#available(iOS 10.0, *)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;original&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIPasteboard&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;general&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;UIPasteboard&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;general&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot; &quot;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;val&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bool&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIPasteboard&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;general&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;hasStrings&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;let&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;str&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;original&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;kt&quot;&gt;UIPasteboard&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;general&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;val&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIPasteboard&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;general&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;isKind&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;UIPasteboard&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;主 App 没有直接获取的方法，但我们可以通过上面提到的通讯方法，在 Keyboard Extension 中把状态传过去&lt;/p&gt;
+
+&lt;h3 id=&quot;全面屏幕隐藏切换-keyboard-按键&quot;&gt;全面屏幕隐藏切换 keyboard 按键&lt;/h3&gt;
+
+&lt;p&gt;在全屏但设备系统会给我们默认提供切换键盘但按钮，所以我们开发的键盘就不需要提供此按钮了，我们可以通过以下方式来判断：&lt;/p&gt;
+
+&lt;div class=&quot;language-swift highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// needsInputModeSwitchKey&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;needsSwitchKey&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;Bool&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;#available(iOSApplicationExtension 11.0, *)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;needsInputModeSwitchKey&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;其他资料&quot;&gt;其他资料&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/CustomKeyboard.html#//apple_ref/doc/uid/TP40014214-CH16-SW4&quot;&gt;Custom Keyboard&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://developer.apple.com/design/human-interface-guidelines/ios/extensions/custom-keyboards/&quot;&gt;Custom Keyboards - Extensions - iOS - Human Interface Guidelines - Apple Developer&lt;/a&gt;&lt;/p&gt;</content><author><name>racechao</name></author><category term="ios" /><category term="keyboard extension" /><summary type="html"></summary></entry><entry><title type="html">Hello World</title><link href="https://jiechaoz.com/hello-world/" rel="alternate" type="text/html" title="Hello World" /><published>2020-06-17T16:34:00+00:00</published><updated>2020-06-17T16:34:00+00:00</updated><id>https://jiechaoz.com/hello-world</id><content type="html" xml:base="https://jiechaoz.com/hello-world/">&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;stdio.h&amp;gt;
+&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hello, World!&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>racechao</name></author><summary type="html">#include &amp;lt;stdio.h&amp;gt; int main() { printf(&quot;Hello, World!&quot;); return 0; }</summary></entry></feed>
